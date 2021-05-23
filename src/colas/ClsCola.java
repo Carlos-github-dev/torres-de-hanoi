@@ -1,16 +1,16 @@
 package colas;
 
-import excepciones.QueueException;
+import excepciones.ColaExcepcion;
 
-public class QueueCls {
+public class ClsCola {
 
-    private Node front, rear;
+    private Nodo front, rear;
     private final int maximumCapacity;
     private int currentSize;
 
-    public QueueCls(int tamano) throws QueueException {
+    public ClsCola(int tamano) throws ColaExcepcion {
         if(tamano<0){
-            throw new QueueException("La cantiad maxima de elementos debe ser igual o mayor a cero");
+            throw new ColaExcepcion("La cantiad maxima de elementos debe ser igual o mayor a cero");
         }
         maximumCapacity = tamano;
         currentSize=0;
@@ -21,11 +21,11 @@ public class QueueCls {
         return currentSize;
     }
 
-    public char enqueue(char character) throws QueueException {
+    public char enqueue(char character) throws ColaExcepcion {
         if (currentSize == maximumCapacity && maximumCapacity != 0) {
-            throw new QueueException("La cola se encuentra llena");
+            throw new ColaExcepcion("La cola se encuentra llena");
         }
-        Node newNode= new Node();
+        Nodo newNode= new Nodo();
         newNode.setData(character);
 
         if (front == null) {
@@ -38,9 +38,9 @@ public class QueueCls {
         return rear.getData();
     }
 
-    public char dequeue() throws QueueException {
+    public char dequeue() throws ColaExcepcion {
         if (isEmpty()) {
-            throw new QueueException("La cola se encuentra vacia");
+            throw new ColaExcepcion("La cola se encuentra vacia");
         }
         char temp = front.getData();
         if (front == rear) {
@@ -56,9 +56,9 @@ public class QueueCls {
         return front == null;
     }
 
-    public char front() throws QueueException {
+    public char front() throws ColaExcepcion {
         if (isEmpty()) {
-            throw new QueueException("La cola se encuentra vacia");
+            throw new ColaExcepcion("La cola se encuentra vacia");
         }
         return front.getData();
     }
@@ -69,7 +69,7 @@ public class QueueCls {
             return "La pila esta vacia";
         }
         String txt = "";
-        Node temp = front;
+        Nodo temp = front;
         while (temp != null) {
             txt += "->" + temp.getData();
             temp = temp.getNext();

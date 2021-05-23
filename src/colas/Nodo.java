@@ -1,14 +1,14 @@
 package colas;
 
-public class Node {
+public class Nodo {
     private char data;
-    private Node next;
+    private Nodo next;
     
 
-    public Node() {
+    public Nodo() {
     }
     
-    public Node(char dato) {
+    public Nodo(char dato) {
         this.data = data;
     }
 
@@ -21,11 +21,11 @@ public class Node {
     }
 
 
-    public Node getNext() {
+    public Nodo getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(Nodo next) {
         this.next = next;
     }
     

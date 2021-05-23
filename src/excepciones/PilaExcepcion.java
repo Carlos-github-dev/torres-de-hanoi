@@ -9,8 +9,8 @@ package excepciones;
  *
  * @author charl
  */
-public class PilaException extends Exception {
-    public PilaException (String message){
+public class PilaExcepcion extends Exception {
+    public PilaExcepcion (String message){
         super(message);
     }
 }
