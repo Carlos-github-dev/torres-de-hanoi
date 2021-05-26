@@ -123,7 +123,7 @@ public class ClsJuego {
     
     public String imprimirHistorial() {
         String txt = "Historial:\n";
-        for (int i =0; i<historial.size()+1;i++){
+        while(historial.size()>0){
             try {
                 txt+="Se movio de la torre ";
                 txt+= historial.dequeue();
