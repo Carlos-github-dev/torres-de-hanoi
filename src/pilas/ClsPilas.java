@@ -33,7 +33,7 @@ public class ClsPilas {
         return cima.getDato();
     }
     
-    public int push(char dato) throws PilaExcepcion{
+    public int push(int dato) throws PilaExcepcion{
         Nodo nuevo = new Nodo();
         nuevo.setDato(dato);
         

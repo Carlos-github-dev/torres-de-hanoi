@@ -1,14 +1,14 @@
 package pilas;
 
 public class Nodo {
-    private char dato;
+    private int dato;
     private Nodo siguiente;
 
     public int getDato() {
         return dato;
     }
 
-    public void setDato(char dato) {
+    public void setDato(int dato) {
         this.dato = dato;
     }
 

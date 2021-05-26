@@ -1,22 +1,22 @@
 package colas;
 
 public class Nodo {
-    private char data;
+    private int data;
     private Nodo next;
     
 
     public Nodo() {
     }
     
-    public Nodo(char dato) {
+    public Nodo(int dato) {
         this.data = data;
     }
 
-    public char getData() {
+    public int getData() {
         return data;
     }
 
-    public void setData(char data) {
+    public void setData(int data) {
         this.data = data;
     }
 

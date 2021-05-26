@@ -21,7 +21,7 @@ public class ClsCola {
         return currentSize;
     }
 
-    public char enqueue(char character) throws ColaExcepcion {
+    public int enqueue(int character) throws ColaExcepcion {
         if (currentSize == maximumCapacity && maximumCapacity != 0) {
             throw new ColaExcepcion("La cola se encuentra llena");
         }
@@ -38,11 +38,11 @@ public class ClsCola {
         return rear.getData();
     }
 
-    public char dequeue() throws ColaExcepcion {
+    public int dequeue() throws ColaExcepcion {
         if (isEmpty()) {
             throw new ColaExcepcion("La cola se encuentra vacia");
         }
-        char temp = front.getData();
+        int temp = front.getData();
         if (front == rear) {
             front = rear = null;
         } else {
@@ -56,7 +56,7 @@ public class ClsCola {
         return front == null;
     }
 
-    public char front() throws ColaExcepcion {
+    public int front() throws ColaExcepcion {
         if (isEmpty()) {
             throw new ColaExcepcion("La cola se encuentra vacia");
         }
