@@ -112,6 +112,29 @@ public class ClsJuego {
             cantidadMinimaDeMovimientos(discos - 1, torre2, torre1, torre3);
         }
     }
+    
+    public void simulacion() throws JuegoExcepcion {
+        simulacion(this.cantidadDeDiscos, 1, 2, 3);
+    }
+
+    private void simulacion(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
+        // Caso Base
+        if (discos == 1) {
+            this.moverDisco(torre1, torre3);
+            System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+        } else {
+            // Dominio
+            // Llamamos a la función de tal forma que decrementamos
+            // el número de discos, y seguimos el algoritmo
+            // (origen, destino, auxiliar)
+            simulacion(discos - 1, torre1, torre3, torre2);
+            this.moverDisco(torre1, torre3);
+            System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+            // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
+            // (auxiliar, origen, destino)
+            simulacion(discos - 1, torre2, torre1, torre3);
+        }
+    }
 
     public String imprimirPilas() {
         String txt = "Listas:\n";
@@ -120,6 +143,7 @@ public class ClsJuego {
         txt += pila3.toString();
         return txt;
     }
+    
     
     public String imprimirHistorial() {
         String txt = "Historial:\n";
