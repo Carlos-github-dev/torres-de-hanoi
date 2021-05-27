@@ -12,24 +12,21 @@ public class ClsJuego {
     private ClsCola historial;
     private int cantidadDeDiscos, contador;
 
-    public ClsJuego(int cantidadDeDiscos) throws JuegoExcepcion {
+    public ClsJuego() {
+    }
+
+    public void iniciarJuego(int cantidadDeDiscos) throws JuegoExcepcion {
         this.setCantidadDeDiscos(cantidadDeDiscos);
         try {
             pila1 = new ClsPilas(cantidadDeDiscos);
             pila2 = new ClsPilas(cantidadDeDiscos);
             pila3 = new ClsPilas(cantidadDeDiscos);
             historial = new ClsCola(0);
-        } catch (PilaExcepcion ex) {
-            System.out.println(ex.getMessage());
-        } catch (ColaExcepcion ex) {
-            System.out.println(ex.getMessage());
-        }
-        for (int i = 0; i < cantidadDeDiscos; i++) {
-            try {
+            for (int i = 0; i < cantidadDeDiscos; i++) {
                 pila1.push(cantidadDeDiscos - i);
-            } catch (PilaExcepcion ex) {
-                System.out.println(ex.getMessage());
             }
+        } catch (PilaExcepcion | ColaExcepcion ex) {
+            System.out.println(ex.getMessage());
         }
     }
 
@@ -58,8 +55,8 @@ public class ClsJuego {
     }
 
     public void moverDisco(int torreOrigen, int torreDestino) throws JuegoExcepcion {
-        if (obtenerPila(torreOrigen)==null || obtenerPila(torreDestino)==null){
-            throw new JuegoExcepcion("La pila de origen no existe");
+        if (obtenerPila(torreOrigen) == null || obtenerPila(torreDestino) == null) {
+            throw new JuegoExcepcion("La pila de origen o destino no existe");
         }
         ClsPilas pilaOrigen = obtenerPila(torreOrigen);
         ClsPilas pilaDestino = obtenerPila(torreDestino);
@@ -67,11 +64,11 @@ public class ClsJuego {
         try {
             temp = pilaOrigen.pop();
             //Comprobar que la torre de Destino no tengo un numero mas pequeno
-            if(!pilaDestino.isEmpty()&&temp>pilaDestino.top()){
+            if (!pilaDestino.isEmpty() && temp > pilaDestino.top()) {
                 pilaOrigen.push(temp);
                 //Mensaje de error
                 throw new JuegoExcepcion("El disco debe ser menor al disco superior de la torre de destino");
-            }else{
+            } else {
                 pilaDestino.push(temp);
                 historial.enqueue(torreOrigen);
                 historial.enqueue(torreDestino);
@@ -112,7 +109,7 @@ public class ClsJuego {
             cantidadMinimaDeMovimientos(discos - 1, torre2, torre1, torre3);
         }
     }
-    
+
     public void simulacion() throws JuegoExcepcion {
         simulacion(this.cantidadDeDiscos, 1, 2, 3);
     }
@@ -138,21 +135,20 @@ public class ClsJuego {
 
     public String imprimirPilas() {
         String txt = "Listas:\n";
-        txt += pila1.toString()+"\n";
-        txt += pila2.toString()+"\n";
+        txt += pila1.toString() + "\n";
+        txt += pila2.toString() + "\n";
         txt += pila3.toString();
         return txt;
     }
-    
-    
+
     public String imprimirHistorial() {
         String txt = "Historial:\n";
-        while(historial.size()>0){
+        while (historial.size() > 0) {
             try {
-                txt+="Se movio de la torre ";
-                txt+= historial.dequeue();
-                txt+=" a la torre ";
-                txt+= historial.dequeue()+"\n";
+                txt += "Se movio de la torre ";
+                txt += historial.dequeue();
+                txt += " a la torre ";
+                txt += historial.dequeue() + "\n";
             } catch (ColaExcepcion ex) {
                 System.out.println(ex.getMessage());
             }

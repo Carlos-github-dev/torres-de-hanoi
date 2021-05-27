@@ -6,7 +6,15 @@ import juego.ClsJuego;
 public class TestJuego {
     public static void main(String[] args) {
         try {
-            ClsJuego juego1 = new ClsJuego(4);
+            ClsJuego juego1 = new ClsJuego();
+            System.out.println("Se inicia el juego con 5 discos");
+            juego1.iniciarJuego(4);
+            juego1.simulacion();
+            System.out.println(juego1.imprimirPilas());
+            System.out.println("Se reinicia el juego a 5 discos");
+            juego1.iniciarJuego(5);
+            juego1.simulacion();
+            System.out.println(juego1.imprimirPilas());  
             //System.out.println(juego1.cantidadMinimaDeMovimientos());
             /*System.out.println(juego1.imprimirPilas());
             System.out.println("Se movio de 1 a 3");
@@ -19,8 +27,7 @@ public class TestJuego {
             juego1.moverDisco(2, 3);
             System.out.println(juego1.imprimirPilas());  
             System.out.println(juego1.imprimirHistorial());*/
-            juego1.simulacion();
-            System.out.println(juego1.imprimirPilas());  
+                  
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
