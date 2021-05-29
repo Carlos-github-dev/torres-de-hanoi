@@ -86,8 +86,12 @@ public class ClsPilas {
     
     public String[] imprimirPila(){
         String[] temp = new String[cantidadElementos];
-        for(int i = 0;i<temp.length;i++){
-            temp[i] = cima.getDato() + " ";
+        Nodo tempNodo = cima;
+        temp[0] = tempNodo.getDato() + "";
+        
+        for(int i = 0;tempNodo != null;i++){
+            temp[i] = tempNodo.getDato() + "";
+            tempNodo = tempNodo.getSiguiente();
         }
         return temp;
     }

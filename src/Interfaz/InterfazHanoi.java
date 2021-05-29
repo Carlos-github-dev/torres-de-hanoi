@@ -56,15 +56,18 @@ public class InterfazHanoi extends javax.swing.JFrame {
         ((DefaultTableModel) tb_Torre1.getModel()).setRowCount(0);
         modeloTablaTorre1.setRowCount(10);
         Nodo nodo;
-        String[] vector;
+        
         int filaDisco = (10 - juego.obtenerPila(1).size());
         if (juego.obtenerPila(1).size() > 0) {
+            String[] vector = juego.obtenerPila(1).imprimirPila();
             for(int i = 0;i<juego.obtenerPila(1).size();i++){
-                vector = juego.obtenerPila(1).imprimirPila();
-                modeloTablaTorre1.insertRow(filaDisco, vector);
+                String[] vectorDato = {vector[i]};
+                modeloTablaTorre1.insertRow(filaDisco, vectorDato);
                 filaDisco++;
             }
-            
+            for(String elemento : vector){
+                System.out.println(elemento);
+            }
         }
         
         tb_Torre1.setModel(modeloTablaTorre1);
