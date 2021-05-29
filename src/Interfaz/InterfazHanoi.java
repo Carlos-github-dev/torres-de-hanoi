@@ -6,12 +6,15 @@
 package Interfaz;
 
 import excepciones.JuegoExcepcion;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import juego.ClsJuego;
+import juego.Movimientos;
 import pilas.Nodo;
 import sun.swing.table.DefaultTableCellHeaderRenderer;
 
@@ -402,44 +405,26 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void btn_ResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResolverActionPerformed
         try {
             // TODO add your handling code here:
-            simulacion();
+            this.juego.solucionadorDeJuego();
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btn_ResolverActionPerformed
 
     private void simulacion() throws JuegoExcepcion {
-        simulacion(juego.getCantidadDeDiscos(), 1, 2, 3);
-        this.presentarTorre(1);
-        this.presentarTorre(2);
-        this.presentarTorre(3);
-    }
-
-    private void simulacion(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
         try {
-            // Caso Base
-            if (discos == 1) {
-                juego.moverDisco(torre1, torre3);
-                Thread.sleep(100);
-                System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
-            } else {
-                // Dominio
-                // Llamamos a la función de tal forma que decrementamos
-                // el número de discos, y seguimos el algoritmo
-                // (origen, destino, auxiliar)
-                simulacion(discos - 1, torre1, torre3, torre2);
-                juego.moverDisco(torre1, torre3);
-                Thread.sleep(100);
-                System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
-                // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
-                // (auxiliar, origen, destino)
-                simulacion(discos - 1, torre2, torre1, torre3);
+            ArrayList<Movimientos> movimientosASimular = juego.simuladorDeJuego();
+            for(int i=0; i<movimientosASimular.size();i++){
+                System.out.println("Origen: "+movimientosASimular.get(i).getOrigen()+". Salida: "+movimientosASimular.get(i).getSalida());
             }
-        } catch (JuegoExcepcion | InterruptedException ex) {
+        } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
-
     }
+
     private void btn_IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarActionPerformed
         try {
             // TODO add your handling code here:

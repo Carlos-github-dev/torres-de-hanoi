@@ -4,6 +4,8 @@ import colas.ClsCola;
 import excepciones.ColaExcepcion;
 import excepciones.JuegoExcepcion;
 import excepciones.PilaExcepcion;
+import java.util.ArrayList;
+import java.util.List;
 import pilas.ClsPilas;
 
 public class ClsJuego {
@@ -120,34 +122,62 @@ public class ClsJuego {
         }
     }
 
-    public void simulacion() throws JuegoExcepcion {
-        simulacion(this.cantidadDeDiscos, 1, 2, 3);
+    public void solucionadorDeJuego() throws JuegoExcepcion {
+        solucionadorDeJuego(this.cantidadDeDiscos, 1, 2, 3);
     }
 
-    private void simulacion(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
+    private void solucionadorDeJuego(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
         try {
             // Caso Base
             if (discos == 1) {
                 this.moverDisco(torre1, torre3);
-                Thread.sleep(100);
                 System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
             } else {
                 // Dominio
                 // Llamamos a la función de tal forma que decrementamos
                 // el número de discos, y seguimos el algoritmo
                 // (origen, destino, auxiliar)
-                simulacion(discos - 1, torre1, torre3, torre2);
+                solucionadorDeJuego(discos - 1, torre1, torre3, torre2);
                 this.moverDisco(torre1, torre3);
-                Thread.sleep(100);
                 System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
                 // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
                 // (auxiliar, origen, destino)
-                simulacion(discos - 1, torre2, torre1, torre3);
+                solucionadorDeJuego(discos - 1, torre2, torre1, torre3);
             }
-        } catch (JuegoExcepcion | InterruptedException ex) {
+        } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
+    }
 
+    public ArrayList simuladorDeJuego() throws JuegoExcepcion {
+        return simuladorDeJuego(this.cantidadDeDiscos, 1, 2, 3);
+    }
+
+    private ArrayList simuladorDeJuego(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
+        ArrayList<Movimientos> historialSimulacion = new ArrayList<>();
+        try {
+            // Caso Base
+            if (discos == 1) {
+                historialSimulacion.add(new Movimientos(torre1, torre3));
+                //this.moverDisco(torre1, torre3);
+                //System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+            } else {
+                // Dominio
+                // Llamamos a la función de tal forma que decrementamos
+                // el número de discos, y seguimos el algoritmo
+                // (origen, destino, auxiliar)
+                simuladorDeJuego(discos - 1, torre1, torre3, torre2);
+                historialSimulacion.add(new Movimientos(torre1, torre3));
+                //this.moverDisco(torre1, torre3);
+                //System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+                // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
+                // (auxiliar, origen, destino)
+                simuladorDeJuego(discos - 1, torre2, torre1, torre3);
+            }
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+        return historialSimulacion;
     }
 
     public String imprimirPilas() {

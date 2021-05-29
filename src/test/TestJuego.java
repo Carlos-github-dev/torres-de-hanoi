@@ -9,11 +9,11 @@ public class TestJuego {
             ClsJuego juego1 = new ClsJuego();
             System.out.println("Se inicia el juego con 5 discos");
             juego1.iniciarJuego(4);
-            juego1.simulacion();
+            juego1.solucionadorDeJuego();
             System.out.println(juego1.imprimirPilas());
             System.out.println("Se reinicia el juego a 5 discos");
             juego1.iniciarJuego(5);
-            juego1.simulacion();
+            juego1.solucionadorDeJuego();
             System.out.println(juego1.imprimirPilas());  
             //System.out.println(juego1.cantidadMinimaDeMovimientos());
             /*System.out.println(juego1.imprimirPilas());
