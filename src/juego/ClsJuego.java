@@ -11,7 +11,6 @@ public class ClsJuego {
     private ClsPilas pila1, pila2, pila3;
     private ClsCola historial;
     private int cantidadDeDiscos, contador, movimientosUsuarioCont;
-    
 
     public ClsJuego() {
     }
@@ -50,7 +49,6 @@ public class ClsJuego {
     public int getMovimientosUsuarioCont() {
         return movimientosUsuarioCont;
     }
-    
 
     public ClsPilas obtenerPila(int pila) {
         if (pila == 1) {
@@ -127,22 +125,29 @@ public class ClsJuego {
     }
 
     private void simulacion(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
-        // Caso Base
-        if (discos == 1) {
-            this.moverDisco(torre1, torre3);
-            System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
-        } else {
-            // Dominio
-            // Llamamos a la función de tal forma que decrementamos
-            // el número de discos, y seguimos el algoritmo
-            // (origen, destino, auxiliar)
-            simulacion(discos - 1, torre1, torre3, torre2);
-            this.moverDisco(torre1, torre3);
-            System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
-            // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
-            // (auxiliar, origen, destino)
-            simulacion(discos - 1, torre2, torre1, torre3);
+        try {
+            // Caso Base
+            if (discos == 1) {
+                this.moverDisco(torre1, torre3);
+                Thread.sleep(100);
+                System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+            } else {
+                // Dominio
+                // Llamamos a la función de tal forma que decrementamos
+                // el número de discos, y seguimos el algoritmo
+                // (origen, destino, auxiliar)
+                simulacion(discos - 1, torre1, torre3, torre2);
+                this.moverDisco(torre1, torre3);
+                Thread.sleep(100);
+                System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+                // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
+                // (auxiliar, origen, destino)
+                simulacion(discos - 1, torre2, torre1, torre3);
+            }
+        } catch (JuegoExcepcion | InterruptedException ex) {
+            System.out.println(ex.getMessage());
         }
+
     }
 
     public String imprimirPilas() {
@@ -167,7 +172,5 @@ public class ClsJuego {
         }
         return txt;
     }
-    
-    
 
 }

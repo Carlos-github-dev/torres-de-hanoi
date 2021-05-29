@@ -156,8 +156,6 @@
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="rowSelectionAllowed" type="boolean" value="false"/>
-            <Property name="showHorizontalLines" type="boolean" value="false"/>
-            <Property name="showVerticalLines" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -191,8 +189,6 @@
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="rowSelectionAllowed" type="boolean" value="false"/>
-            <Property name="showHorizontalLines" type="boolean" value="false"/>
-            <Property name="showVerticalLines" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -226,8 +222,6 @@
             </Property>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="rowSelectionAllowed" type="boolean" value="false"/>
-            <Property name="showHorizontalLines" type="boolean" value="false"/>
-            <Property name="showVerticalLines" type="boolean" value="false"/>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
@@ -239,21 +233,33 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="B"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_1_BActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_1_C">
       <Properties>
         <Property name="text" type="java.lang.String" value="C"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_1_CActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_2_A">
       <Properties>
         <Property name="text" type="java.lang.String" value="A"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_2_AActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_2_C">
       <Properties>
         <Property name="text" type="java.lang.String" value="C"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_2_CActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_3_A">
       <Properties>
@@ -267,6 +273,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="B"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_3_BActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cb_NumDiscos">
       <Properties>

@@ -6,6 +6,8 @@
 package Interfaz;
 
 import excepciones.JuegoExcepcion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -49,7 +51,7 @@ public class InterfazHanoi extends javax.swing.JFrame {
 
     }
 
-private void presentarTorre(int numeroTorre) {
+    private void presentarTorre(int numeroTorre) {
         if (numeroTorre == 1) {
             ((DefaultTableModel) tb_Torre1.getModel()).setRowCount(0);
             modeloTablaTorre1.setRowCount(10);
@@ -62,15 +64,12 @@ private void presentarTorre(int numeroTorre) {
                     modeloTablaTorre1.insertRow(filaDisco, vectorDato);
                     filaDisco++;
                 }
-                for (String elemento : vector) {
-                    System.out.println(elemento);
-                }
             }
 
             tb_Torre1.setModel(modeloTablaTorre1);
             modeloTablaTorre1.setRowCount(10);
         }
-        
+
         if (numeroTorre == 2) {
             ((DefaultTableModel) tb_Torre2.getModel()).setRowCount(0);
             modeloTablaTorre2.setRowCount(10);
@@ -83,15 +82,12 @@ private void presentarTorre(int numeroTorre) {
                     modeloTablaTorre2.insertRow(filaDisco, vectorDato);
                     filaDisco++;
                 }
-                for (String elemento : vector) {
-                    System.out.println(elemento);
-                }
             }
 
             tb_Torre2.setModel(modeloTablaTorre2);
             modeloTablaTorre2.setRowCount(10);
         }
-        
+
         if (numeroTorre == 3) {
             ((DefaultTableModel) tb_Torre3.getModel()).setRowCount(0);
             modeloTablaTorre3.setRowCount(10);
@@ -103,9 +99,6 @@ private void presentarTorre(int numeroTorre) {
                     String[] vectorDato = {vector[i]};
                     modeloTablaTorre3.insertRow(filaDisco, vectorDato);
                     filaDisco++;
-                }
-                for (String elemento : vector) {
-                    System.out.println(elemento);
                 }
             }
 
@@ -166,8 +159,6 @@ private void presentarTorre(int numeroTorre) {
         tb_Torre2.setAutoscrolls(false);
         tb_Torre2.setFocusable(false);
         tb_Torre2.setRowSelectionAllowed(false);
-        tb_Torre2.setShowHorizontalLines(false);
-        tb_Torre2.setShowVerticalLines(false);
         jScrollPane2.setViewportView(tb_Torre2);
         if (tb_Torre2.getColumnModel().getColumnCount() > 0) {
             tb_Torre2.getColumnModel().getColumn(0).setResizable(false);
@@ -192,8 +183,6 @@ private void presentarTorre(int numeroTorre) {
         tb_Torre1.setAutoscrolls(false);
         tb_Torre1.setFocusable(false);
         tb_Torre1.setRowSelectionAllowed(false);
-        tb_Torre1.setShowHorizontalLines(false);
-        tb_Torre1.setShowVerticalLines(false);
         jScrollPane3.setViewportView(tb_Torre1);
         if (tb_Torre1.getColumnModel().getColumnCount() > 0) {
             tb_Torre1.getColumnModel().getColumn(0).setResizable(false);
@@ -218,20 +207,38 @@ private void presentarTorre(int numeroTorre) {
         tb_Torre3.setAutoscrolls(false);
         tb_Torre3.setFocusable(false);
         tb_Torre3.setRowSelectionAllowed(false);
-        tb_Torre3.setShowHorizontalLines(false);
-        tb_Torre3.setShowVerticalLines(false);
         jScrollPane4.setViewportView(tb_Torre3);
         if (tb_Torre3.getColumnModel().getColumnCount() > 0) {
             tb_Torre3.getColumnModel().getColumn(0).setResizable(false);
         }
 
         btn_1_B.setText("B");
+        btn_1_B.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_1_BActionPerformed(evt);
+            }
+        });
 
         btn_1_C.setText("C");
+        btn_1_C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_1_CActionPerformed(evt);
+            }
+        });
 
         btn_2_A.setText("A");
+        btn_2_A.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_2_AActionPerformed(evt);
+            }
+        });
 
         btn_2_C.setText("C");
+        btn_2_C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_2_CActionPerformed(evt);
+            }
+        });
 
         btn_3_A.setText("A");
         btn_3_A.addActionListener(new java.awt.event.ActionListener() {
@@ -241,6 +248,11 @@ private void presentarTorre(int numeroTorre) {
         });
 
         btn_3_B.setText("B");
+        btn_3_B.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_3_BActionPerformed(evt);
+            }
+        });
 
         cb_NumDiscos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3", "4", "5", "6", "7", "8", "9", "10" }));
         cb_NumDiscos.addActionListener(new java.awt.event.ActionListener() {
@@ -377,12 +389,57 @@ private void presentarTorre(int numeroTorre) {
 
     private void btn_3_AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3_AActionPerformed
         // TODO add your handling code here:
+        try {
+            juego.moverDisco(3, 1);
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btn_3_AActionPerformed
 
     private void btn_ResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResolverActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            simulacion();
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
     }//GEN-LAST:event_btn_ResolverActionPerformed
 
+    private void simulacion() throws JuegoExcepcion {
+        simulacion(juego.getCantidadDeDiscos(), 1, 2, 3);
+        this.presentarTorre(1);
+        this.presentarTorre(2);
+        this.presentarTorre(3);
+    }
+
+    private void simulacion(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
+        try {
+            // Caso Base
+            if (discos == 1) {
+                juego.moverDisco(torre1, torre3);
+                Thread.sleep(100);
+                System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+            } else {
+                // Dominio
+                // Llamamos a la función de tal forma que decrementamos
+                // el número de discos, y seguimos el algoritmo
+                // (origen, destino, auxiliar)
+                simulacion(discos - 1, torre1, torre3, torre2);
+                juego.moverDisco(torre1, torre3);
+                Thread.sleep(100);
+                System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+                // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
+                // (auxiliar, origen, destino)
+                simulacion(discos - 1, torre2, torre1, torre3);
+            }
+        } catch (JuegoExcepcion | InterruptedException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }
     private void btn_IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarActionPerformed
         try {
             // TODO add your handling code here:
@@ -395,6 +452,64 @@ private void presentarTorre(int numeroTorre) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btn_IniciarActionPerformed
+
+    private void btn_1_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_1_BActionPerformed
+        try {
+            juego.moverDisco(1, 2);
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_1_BActionPerformed
+
+    private void btn_1_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_1_CActionPerformed
+        try {
+            juego.moverDisco(1, 3);
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_1_CActionPerformed
+
+    private void btn_2_AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_2_AActionPerformed
+        // TODO add your handling code here:
+        try {
+            juego.moverDisco(2, 1);
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_2_AActionPerformed
+
+    private void btn_2_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_2_CActionPerformed
+        // TODO add your handling code here:
+        try {
+            juego.moverDisco(2, 3);
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_2_CActionPerformed
+
+    private void btn_3_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3_BActionPerformed
+        // TODO add your handling code here:
+        try {
+            juego.moverDisco(3, 2);
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
+        } catch (JuegoExcepcion ex) {
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_btn_3_BActionPerformed
 
     /**
      * @param args the command line arguments
