@@ -49,29 +49,69 @@ public class InterfazHanoi extends javax.swing.JFrame {
 
     }
 
-    private void presentarTorre1() {
-        ((DefaultTableModel) tb_Torre1.getModel()).setRowCount(0);
-        modeloTablaTorre1.setRowCount(10);
-        Nodo nodo;
-        
-        int filaDisco = (10 - juego.obtenerPila(1).size());
-        if (juego.obtenerPila(1).size() > 0) {
-            String[] vector = juego.obtenerPila(1).imprimirPila();
-            for(int i = 0;i<juego.obtenerPila(1).size();i++){
-                String[] vectorDato = {vector[i]};
-                modeloTablaTorre1.insertRow(filaDisco, vectorDato);
-                filaDisco++;
+private void presentarTorre(int numeroTorre) {
+        if (numeroTorre == 1) {
+            ((DefaultTableModel) tb_Torre1.getModel()).setRowCount(0);
+            modeloTablaTorre1.setRowCount(10);
+
+            int filaDisco = (10 - juego.obtenerPila(1).size());
+            if (juego.obtenerPila(1).size() > 0) {
+                String[] vector = juego.obtenerPila(1).imprimirPila();
+                for (int i = 0; i < juego.obtenerPila(1).size(); i++) {
+                    String[] vectorDato = {vector[i]};
+                    modeloTablaTorre1.insertRow(filaDisco, vectorDato);
+                    filaDisco++;
+                }
+                for (String elemento : vector) {
+                    System.out.println(elemento);
+                }
             }
-            for(String elemento : vector){
-                System.out.println(elemento);
-            }
+
+            tb_Torre1.setModel(modeloTablaTorre1);
+            modeloTablaTorre1.setRowCount(10);
         }
         
-        tb_Torre1.setModel(modeloTablaTorre1);
-        modeloTablaTorre1.setRowCount(10);
+        if (numeroTorre == 2) {
+            ((DefaultTableModel) tb_Torre2.getModel()).setRowCount(0);
+            modeloTablaTorre2.setRowCount(10);
+
+            int filaDisco = (10 - juego.obtenerPila(2).size());
+            if (juego.obtenerPila(2).size() > 0) {
+                String[] vector = juego.obtenerPila(2).imprimirPila();
+                for (int i = 0; i < juego.obtenerPila(2).size(); i++) {
+                    String[] vectorDato = {vector[i]};
+                    modeloTablaTorre2.insertRow(filaDisco, vectorDato);
+                    filaDisco++;
+                }
+                for (String elemento : vector) {
+                    System.out.println(elemento);
+                }
+            }
+
+            tb_Torre2.setModel(modeloTablaTorre2);
+            modeloTablaTorre2.setRowCount(10);
+        }
         
-        
-        //System.out.println();
+        if (numeroTorre == 3) {
+            ((DefaultTableModel) tb_Torre3.getModel()).setRowCount(0);
+            modeloTablaTorre3.setRowCount(10);
+
+            int filaDisco = (10 - juego.obtenerPila(3).size());
+            if (juego.obtenerPila(3).size() > 0) {
+                String[] vector = juego.obtenerPila(3).imprimirPila();
+                for (int i = 0; i < juego.obtenerPila(3).size(); i++) {
+                    String[] vectorDato = {vector[i]};
+                    modeloTablaTorre3.insertRow(filaDisco, vectorDato);
+                    filaDisco++;
+                }
+                for (String elemento : vector) {
+                    System.out.println(elemento);
+                }
+            }
+
+            tb_Torre3.setModel(modeloTablaTorre3);
+            modeloTablaTorre3.setRowCount(10);
+        }
     }
 
     /**
@@ -347,7 +387,9 @@ public class InterfazHanoi extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             juego.iniciarJuego(Integer.parseInt(cb_NumDiscos.getSelectedItem().toString()));
-            this.presentarTorre1();
+            this.presentarTorre(1);
+            this.presentarTorre(2);
+            this.presentarTorre(3);
 
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
