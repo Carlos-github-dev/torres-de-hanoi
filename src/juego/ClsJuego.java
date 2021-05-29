@@ -10,13 +10,15 @@ public class ClsJuego {
 
     private ClsPilas pila1, pila2, pila3;
     private ClsCola historial;
-    private int cantidadDeDiscos, contador;
+    private int cantidadDeDiscos, contador, movimientosUsuarioCont;
+    
 
     public ClsJuego() {
     }
 
     public void iniciarJuego(int cantidadDeDiscos) throws JuegoExcepcion {
         this.setCantidadDeDiscos(cantidadDeDiscos);
+        this.setMovimientosUsuarioCont(0);
         try {
             pila1 = new ClsPilas(cantidadDeDiscos);
             pila2 = new ClsPilas(cantidadDeDiscos);
@@ -41,7 +43,16 @@ public class ClsJuego {
         this.cantidadDeDiscos = cantidadDeDiscos;
     }
 
-    private ClsPilas obtenerPila(int pila) {
+    public void setMovimientosUsuarioCont(int movimientosUsuarioCont) {
+        this.movimientosUsuarioCont = movimientosUsuarioCont;
+    }
+
+    public int getMovimientosUsuarioCont() {
+        return movimientosUsuarioCont;
+    }
+    
+
+    public ClsPilas obtenerPila(int pila) {
         if (pila == 1) {
             return pila1;
         }
@@ -72,6 +83,7 @@ public class ClsJuego {
                 pilaDestino.push(temp);
                 historial.enqueue(torreOrigen);
                 historial.enqueue(torreDestino);
+                movimientosUsuarioCont++;
                 //System.out.println("Se agrego torre origen: "+torreOrigen+" y torre destino"+torreDestino+" al historial");
             }
         } catch (PilaExcepcion ex) {
@@ -155,5 +167,7 @@ public class ClsJuego {
         }
         return txt;
     }
+    
+    
 
 }

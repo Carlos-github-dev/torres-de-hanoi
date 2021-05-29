@@ -5,18 +5,61 @@
  */
 package Interfaz;
 
+import excepciones.JuegoExcepcion;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import juego.ClsJuego;
+import pilas.Nodo;
+import sun.swing.table.DefaultTableCellHeaderRenderer;
+
 /**
  *
  * @author luis arguello
  */
 public class InterfazHanoi extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InterfazHanoi
-     */
+    DefaultTableModel modeloTablaTorre1, modeloTablaTorre2, modeloTablaTorre3;
+    ClsJuego juego = new ClsJuego();
+    int numDiscos;
     public InterfazHanoi() {
         initComponents();
         
+        modeloTablaTorre1 = (DefaultTableModel) tb_Torre1.getModel();
+        modeloTablaTorre1.setRowCount(10);
+        
+        modeloTablaTorre2 = (DefaultTableModel) tb_Torre2.getModel();
+        modeloTablaTorre2.setRowCount(10);
+        
+        modeloTablaTorre3 = (DefaultTableModel) tb_Torre3.getModel();
+        modeloTablaTorre3.setRowCount(10);
+        
+        DefaultTableCellRenderer renderTorre1 = new DefaultTableCellHeaderRenderer();
+        renderTorre1.setHorizontalAlignment(SwingConstants.CENTER);
+        tb_Torre1.getColumnModel().getColumn(0).setCellRenderer(renderTorre1);
+        
+        DefaultTableCellRenderer renderTorre2 = new DefaultTableCellHeaderRenderer();
+        renderTorre2.setHorizontalAlignment(SwingConstants.CENTER);
+        tb_Torre2.getColumnModel().getColumn(0).setCellRenderer(renderTorre2);
+        
+        DefaultTableCellRenderer renderTorre3 = new DefaultTableCellHeaderRenderer();
+        renderTorre3.setHorizontalAlignment(SwingConstants.CENTER);
+        tb_Torre3.getColumnModel().getColumn(0).setCellRenderer(renderTorre3);
+        
+    }
+    
+    private void presentarTirre1(){
+        ((DefaultTableModel)tb_Torre1.getModel()).setRowCount(0);
+        
+        modeloTablaTorre1.setRowCount(10);
+        
+        Nodo nodo;
+        int filaDisco = (10- juego.getCantidadDeDiscos());
+        if(juego.getCantidadDeDiscos()>0){
+            
+        }
     }
 
     /**
@@ -289,7 +332,14 @@ public class InterfazHanoi extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_ResolverActionPerformed
 
     private void btn_IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            juego.iniciarJuego(Integer.parseInt(cb_NumDiscos.getSelectedItem().toString()));
+            
+            
+        } catch (JuegoExcepcion ex) {
+            Logger.getLogger(InterfazHanoi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btn_IniciarActionPerformed
 
     /**
