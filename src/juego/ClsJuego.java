@@ -13,6 +13,7 @@ public class ClsJuego {
     private ClsPilas pila1, pila2, pila3;
     private ClsCola historial;
     private int cantidadDeDiscos, contador, movimientosUsuarioCont;
+    private ArrayList<Movimientos> historialMovimientosARealizar = new ArrayList<>();
 
     public ClsJuego() {
     }
@@ -150,15 +151,15 @@ public class ClsJuego {
     }
 
     public ArrayList simuladorDeJuego() throws JuegoExcepcion {
-        return simuladorDeJuego(this.cantidadDeDiscos, 1, 2, 3);
+        simuladorDeJuego(this.cantidadDeDiscos, 1, 2, 3);
+        return historialMovimientosARealizar;
     }
 
-    private ArrayList simuladorDeJuego(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
-        ArrayList<Movimientos> historialSimulacion = new ArrayList<>();
+    private void simuladorDeJuego(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
         try {
             // Caso Base
             if (discos == 1) {
-                historialSimulacion.add(new Movimientos(torre1, torre3));
+                historialMovimientosARealizar.add(new Movimientos(torre1, torre3));
                 //this.moverDisco(torre1, torre3);
                 //System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
             } else {
@@ -167,7 +168,7 @@ public class ClsJuego {
                 // el número de discos, y seguimos el algoritmo
                 // (origen, destino, auxiliar)
                 simuladorDeJuego(discos - 1, torre1, torre3, torre2);
-                historialSimulacion.add(new Movimientos(torre1, torre3));
+                historialMovimientosARealizar.add(new Movimientos(torre1, torre3));
                 //this.moverDisco(torre1, torre3);
                 //System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
                 // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
@@ -177,7 +178,6 @@ public class ClsJuego {
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
-        return historialSimulacion;
     }
 
     public String imprimirPilas() {

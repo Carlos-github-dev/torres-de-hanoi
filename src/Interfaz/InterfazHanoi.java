@@ -405,10 +405,7 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void btn_ResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResolverActionPerformed
         try {
             // TODO add your handling code here:
-            this.juego.solucionadorDeJuego();
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            this.simulacion();
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -416,12 +413,18 @@ public class InterfazHanoi extends javax.swing.JFrame {
 
     private void simulacion() throws JuegoExcepcion {
         try {
-            ArrayList<Movimientos> movimientosASimular = juego.simuladorDeJuego();
-            for(int i=0; i<movimientosASimular.size();i++){
-                System.out.println("Origen: "+movimientosASimular.get(i).getOrigen()+". Salida: "+movimientosASimular.get(i).getSalida());
+            ArrayList<Movimientos> movimientosASimular = this.juego.simuladorDeJuego();
+            for (Movimientos movimiento : movimientosASimular) {
+                this.juego.moverDisco(movimiento.getOrigen(), movimiento.getSalida());
+                this.presentarTorre(1);
+                this.presentarTorre(2);
+                this.presentarTorre(3);
+                Thread.sleep(100);
             }
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
+        } catch (InterruptedException ex) {
+            Logger.getLogger(InterfazHanoi.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
