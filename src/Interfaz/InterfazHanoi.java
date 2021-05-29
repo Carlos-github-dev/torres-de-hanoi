@@ -6,9 +6,6 @@
 package Interfaz;
 
 import excepciones.JuegoExcepcion;
-import excepciones.PilaExcepcion;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -353,7 +350,7 @@ public class InterfazHanoi extends javax.swing.JFrame {
             this.presentarTorre1();
 
         } catch (JuegoExcepcion ex) {
-            Logger.getLogger(InterfazHanoi.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_btn_IniciarActionPerformed
 
