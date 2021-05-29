@@ -83,6 +83,14 @@ public class ClsPilas {
         }
         return -1;
     }
+    
+    public String[] imprimirPila(){
+        String[] temp = new String[cantidadElementos];
+        for(int i = 0;i<temp.length;i++){
+            temp[i] = cima.getDato() + " ";
+        }
+        return temp;
+    }
 
     @Override
     public String toString() {
