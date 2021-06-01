@@ -51,7 +51,12 @@ public class ClsJuego {
     public int getMovimientosUsuarioCont() {
         return movimientosUsuarioCont;
     }
-
+    
+    /**
+     * Retorna la pila que se desea utilizar
+     * @param pila
+     * @return 
+     */
     public ClsPilas obtenerPila(int pila) {
         if (pila == 1) {
             return pila1;
@@ -64,7 +69,14 @@ public class ClsJuego {
         }
         return null;
     }
-
+    
+    /**
+     * Realiza un movimiento del elemento superior de una pila a otra
+     * @param torreOrigen
+     * @param torreDestino
+     * @return
+     * @throws JuegoExcepcion 
+     */
     public boolean moverDisco(int torreOrigen, int torreDestino) throws JuegoExcepcion {
         if (obtenerPila(torreOrigen) == null || obtenerPila(torreDestino) == null) {
             throw new JuegoExcepcion("La pila de origen o destino no existe");
@@ -98,19 +110,33 @@ public class ClsJuego {
         }
         return false;
     }
-
+    
+    /**
+     * Deulve true si el juego ya finalizo
+     * @return 
+     */
     public boolean comprobarSiJuegoTermina() {
         if (pila3.size() == cantidadDeDiscos) {
             return true;
         }
         return false;
     }
-
+    
+    /**
+     * Llama al metodo recursivo privado que devuelve la cantidad minima de movimientos a realizar
+     * @return 
+     */
     public int cantidadMinimaDeMovimientos() {
         cantidadMinimaDeMovimientos(this.cantidadDeDiscos, 1, 2, 3);
         return contador;
     }
-
+    /**
+     * Calcula la cantidad minima de movimientos a realizar con una cantidad determinada de discos
+     * @param discos tamano 
+     * @param torre1
+     * @param torre2
+     * @param torre3 
+     */
     private void cantidadMinimaDeMovimientos(int discos, int torre1, int torre2, int torre3) {
         // Caso Base
         if (discos == 1) {
@@ -206,8 +232,8 @@ public class ClsJuego {
         }
         return txt;
     }
-    
-    public int obtenerTamanoHistorial(){
+
+    public int obtenerTamanoHistorial() {
         return historial.size();
     }
 
