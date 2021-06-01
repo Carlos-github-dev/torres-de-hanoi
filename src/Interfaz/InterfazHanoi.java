@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -132,14 +133,11 @@ public class InterfazHanoi extends javax.swing.JFrame {
         btn_3_A = new javax.swing.JButton();
         btn_3_B = new javax.swing.JButton();
         cb_NumDiscos = new javax.swing.JComboBox<>();
-        lbl_MinMovimientos = new javax.swing.JLabel();
-        lbl_Movimientos = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        btn_Reiniciar = new javax.swing.JButton();
         btn_Resolver = new javax.swing.JButton();
         btn_Iniciar = new javax.swing.JButton();
+        label1 = new java.awt.Label();
+        lbl_lastMove = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -264,22 +262,8 @@ public class InterfazHanoi extends javax.swing.JFrame {
             }
         });
 
-        lbl_MinMovimientos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_MinMovimientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        lbl_Movimientos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbl_Movimientos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         jLabel3.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
         jLabel3.setText("Numero Discos");
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        jLabel4.setText("Numero Movimientos");
-
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 10)); // NOI18N
-        jLabel5.setText("Numero Minimo Movimientos");
-
-        btn_Reiniciar.setText("Reiniciar");
 
         btn_Resolver.setText("Resolver");
         btn_Resolver.addActionListener(new java.awt.event.ActionListener() {
@@ -295,58 +279,58 @@ public class InterfazHanoi extends javax.swing.JFrame {
             }
         });
 
+        label1.setText("Ultimo movimiento:");
+
+        lbl_lastMove.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(33, Short.MAX_VALUE))
+                        .addContainerGap(107, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(btn_1_C)
-                        .addGap(81, 81, 81)
-                        .addComponent(btn_2_A)
-                        .addGap(37, 37, 37)
-                        .addComponent(btn_2_C)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_3_A)
-                        .addGap(37, 37, 37)
-                        .addComponent(btn_3_B)
-                        .addGap(50, 50, 50))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cb_NumDiscos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(37, 37, 37)
-                                .addComponent(lbl_MinMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(cb_NumDiscos, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addGap(29, 29, 29)
+                                            .addComponent(btn_Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(192, 192, 192)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(btn_Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(16, 16, 16)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btn_1_B)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_Movimientos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_Reiniciar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Resolver, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(63, 63, 63))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_1_B)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btn_Resolver, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(168, 168, 168))
+                                    .addComponent(lbl_lastMove, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(88, 88, 88)
+                                .addComponent(btn_1_C)
+                                .addGap(81, 81, 81)
+                                .addComponent(btn_2_A)
+                                .addGap(37, 37, 37)
+                                .addComponent(btn_2_C)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_3_A)
+                                .addGap(37, 37, 37)
+                                .addComponent(btn_3_B)))
+                        .addGap(50, 50, 50))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,19 +351,15 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cb_NumDiscos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_MinMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_Movimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                    .addComponent(cb_NumDiscos, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_lastMove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Iniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_Reiniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Resolver, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
@@ -393,10 +373,17 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void btn_3_AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3_AActionPerformed
         // TODO add your handling code here:
         try {
-            juego.moverDisco(3, 1);
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            boolean movimiento = juego.moverDisco(3, 1);
+            if (movimiento) {
+                lbl_lastMove.setText("Ultimo movimiento de 3 a 1");
+                this.presentarTorre(3);
+                this.presentarTorre(1);
+            }
+            if (juego.comprobarSiJuegoTermina()) {
+                JOptionPane.showMessageDialog(null, "Felicidades gano\n"
+                        + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
+                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+            }
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -415,7 +402,7 @@ public class InterfazHanoi extends javax.swing.JFrame {
         try {
             ArrayList<Movimientos> movimientosASimular = this.juego.simuladorDeJuego();
             for (Movimientos movimiento : movimientosASimular) {
-                this.juego.moverDisco(movimiento.getOrigen(), movimiento.getSalida());
+                this.juego.moverDisco(movimiento.getOrigen(), movimiento.getDestino());
                 this.presentarTorre(1);
                 this.presentarTorre(2);
                 this.presentarTorre(3);
@@ -443,10 +430,18 @@ public class InterfazHanoi extends javax.swing.JFrame {
 
     private void btn_1_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_1_BActionPerformed
         try {
-            juego.moverDisco(1, 2);
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            boolean movimiento = juego.moverDisco(1, 2);
+            if (movimiento) {
+                lbl_lastMove.setText("Ultimo movimiento de 1 a 2");
+                this.presentarTorre(1);
+                this.presentarTorre(2);
+            }
+            if (juego.comprobarSiJuegoTermina()) {
+                JOptionPane.showMessageDialog(null, "Felicidades gano\n"
+                        + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
+                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+            }
+
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -454,10 +449,17 @@ public class InterfazHanoi extends javax.swing.JFrame {
 
     private void btn_1_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_1_CActionPerformed
         try {
-            juego.moverDisco(1, 3);
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            boolean movimiento = juego.moverDisco(1, 3);
+            if (movimiento) {
+                lbl_lastMove.setText("Ultimo movimiento de 1 a 3");
+                this.presentarTorre(1);
+                this.presentarTorre(3);
+            }
+            if (juego.comprobarSiJuegoTermina()) {
+                JOptionPane.showMessageDialog(null, "Felicidades gano\n"
+                        + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
+                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+            }
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -466,10 +468,17 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void btn_2_AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_2_AActionPerformed
         // TODO add your handling code here:
         try {
-            juego.moverDisco(2, 1);
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            boolean movimiento = juego.moverDisco(2, 1);
+            if (movimiento) {
+                lbl_lastMove.setText("Ultimo movimiento de 2 a 1");
+                this.presentarTorre(2);
+                this.presentarTorre(1);
+            }
+            if (juego.comprobarSiJuegoTermina()) {
+                JOptionPane.showMessageDialog(null, "Felicidades gano\n"
+                        + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
+                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+            }
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -478,10 +487,17 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void btn_2_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_2_CActionPerformed
         // TODO add your handling code here:
         try {
-            juego.moverDisco(2, 3);
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            boolean movimiento = juego.moverDisco(2, 3);
+            if (movimiento) {
+                lbl_lastMove.setText("Ultimo movimiento de 2 a 3");
+                this.presentarTorre(2);
+                this.presentarTorre(3);
+            }
+            if (juego.comprobarSiJuegoTermina()) {
+                JOptionPane.showMessageDialog(null, "Felicidades gano\n"
+                        + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
+                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+            }
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -490,10 +506,17 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void btn_3_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3_BActionPerformed
         // TODO add your handling code here:
         try {
-            juego.moverDisco(3, 2);
-            this.presentarTorre(1);
-            this.presentarTorre(2);
-            this.presentarTorre(3);
+            boolean movimiento = juego.moverDisco(3, 2);
+            if (movimiento) {
+                lbl_lastMove.setText("Ultimo movimiento de 3 a 2");
+                this.presentarTorre(3);
+                this.presentarTorre(2);
+            }
+            if (juego.comprobarSiJuegoTermina()) {
+                JOptionPane.showMessageDialog(null, "Felicidades gano\n"
+                        + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
+                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+            }
         } catch (JuegoExcepcion ex) {
             System.out.println(ex.getMessage());
         }
@@ -544,17 +567,14 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private javax.swing.JButton btn_3_A;
     private javax.swing.JButton btn_3_B;
     private javax.swing.JButton btn_Iniciar;
-    private javax.swing.JButton btn_Reiniciar;
     private javax.swing.JButton btn_Resolver;
     private javax.swing.JComboBox<String> cb_NumDiscos;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JLabel lbl_MinMovimientos;
-    private javax.swing.JLabel lbl_Movimientos;
+    private java.awt.Label label1;
+    private java.awt.Label lbl_lastMove;
     private javax.swing.JTable tb_Torre1;
     private javax.swing.JTable tb_Torre2;
     private javax.swing.JTable tb_Torre3;

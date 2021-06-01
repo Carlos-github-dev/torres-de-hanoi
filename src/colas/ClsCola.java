@@ -1,6 +1,7 @@
 package colas;
 
 import excepciones.ColaExcepcion;
+import juego.Movimientos;
 
 public class ClsCola {
 
@@ -21,7 +22,7 @@ public class ClsCola {
         return currentSize;
     }
 
-    public int enqueue(int character) throws ColaExcepcion {
+    public Movimientos enqueue(Movimientos character) throws ColaExcepcion {
         if (currentSize == maximumCapacity && maximumCapacity != 0) {
             throw new ColaExcepcion("La cola se encuentra llena");
         }
@@ -38,11 +39,11 @@ public class ClsCola {
         return rear.getData();
     }
 
-    public int dequeue() throws ColaExcepcion {
+    public Movimientos dequeue() throws ColaExcepcion {
         if (isEmpty()) {
             throw new ColaExcepcion("La cola se encuentra vacia");
         }
-        int temp = front.getData();
+        Movimientos temp = front.getData();
         if (front == rear) {
             front = rear = null;
         } else {
@@ -56,7 +57,7 @@ public class ClsCola {
         return front == null;
     }
 
-    public int front() throws ColaExcepcion {
+    public Movimientos front() throws ColaExcepcion {
         if (isEmpty()) {
             throw new ColaExcepcion("La cola se encuentra vacia");
         }

@@ -66,7 +66,7 @@ public class ClsJuego {
         return null;
     }
 
-    public void moverDisco(int torreOrigen, int torreDestino) throws JuegoExcepcion {
+    public boolean moverDisco(int torreOrigen, int torreDestino) throws JuegoExcepcion {
         if (obtenerPila(torreOrigen) == null || obtenerPila(torreDestino) == null) {
             throw new JuegoExcepcion("La pila de origen o destino no existe");
         }
@@ -82,9 +82,9 @@ public class ClsJuego {
                 throw new JuegoExcepcion("El disco debe ser menor al disco superior de la torre de destino");
             } else {
                 pilaDestino.push(temp);
-                historial.enqueue(torreOrigen);
-                historial.enqueue(torreDestino);
+                historial.enqueue(new Movimientos(torreOrigen, torreDestino));
                 movimientosUsuarioCont++;
+                return true;
                 //System.out.println("Se agrego torre origen: "+torreOrigen+" y torre destino"+torreDestino+" al historial");
             }
         } catch (PilaExcepcion ex) {
@@ -97,6 +97,14 @@ public class ClsJuego {
         } catch (ColaExcepcion ex) {
             System.out.println(ex.getMessage());
         }
+        return false;
+    }
+
+    public boolean comprobarSiJuegoTermina() {
+        if (pila3.size() == cantidadDeDiscos) {
+            return true;
+        }
+        return false;
     }
 
     public int cantidadMinimaDeMovimientos() {
@@ -107,7 +115,7 @@ public class ClsJuego {
     private void cantidadMinimaDeMovimientos(int discos, int torre1, int torre2, int torre3) {
         // Caso Base
         if (discos == 1) {
-            System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+            //System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
             contador++;
         } else {
             // Dominio
@@ -115,7 +123,7 @@ public class ClsJuego {
             // el número de discos, y seguimos el algoritmo
             // (origen, destino, auxiliar)
             cantidadMinimaDeMovimientos(discos - 1, torre1, torre3, torre2);
-            System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
+            //System.out.println("Mover disco de Torre " + torre1 + " a Torre " + torre3);
             contador++;
             // En esta ocasión siguiendo el algoritmo hacemos lo siguiente
             // (auxiliar, origen, destino)
@@ -201,6 +209,10 @@ public class ClsJuego {
             }
         }
         return txt;
+    }
+    
+    public int obtenerTamanoHistorial(){
+        return historial.size();
     }
 
 }

@@ -12,11 +12,11 @@ package juego;
 public class Movimientos {
 
     int origen;
-    int salida;
+    int destino;
 
     public Movimientos(int origen, int salida) {
         this.origen = origen;
-        this.salida = salida;
+        this.destino = salida;
     }
 
     public int getOrigen() {
@@ -27,12 +27,12 @@ public class Movimientos {
         this.origen = origen;
     }
 
-    public int getSalida() {
-        return salida;
+    public int getDestino() {
+        return destino;
     }
 
-    public void setSalida(int salida) {
-        this.salida = salida;
+    public void setDestino(int destino) {
+        this.destino = destino;
     }
     
     

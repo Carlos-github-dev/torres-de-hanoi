@@ -1,22 +1,24 @@
 package colas;
 
+import juego.Movimientos;
+
 public class Nodo {
-    private int data;
+    private Movimientos data;
     private Nodo next;
     
 
     public Nodo() {
     }
     
-    public Nodo(int dato) {
+    public Nodo(Movimientos dato) {
         this.data = data;
     }
 
-    public int getData() {
+    public Movimientos getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(Movimientos data) {
         this.data = data;
     }
 
