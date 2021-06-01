@@ -534,7 +534,7 @@ public class InterfazHanoi extends javax.swing.JFrame {
                     this.juego.moverDisco(movimiento.getOrigen(), movimiento.getDestino());
                     interfaz.presentarTorre(movimiento.getOrigen());
                     interfaz.presentarTorre(movimiento.getDestino());
-                    interfaz.lbl_lastMove.setText("Ultimo movimineto de " + movimiento.getOrigen() + " a " + movimiento.getDestino());
+                    interfaz.lbl_lastMove.setText("Ultimo movimiento de " + movimiento.getOrigen() + " a " + movimiento.getDestino());
                     Thread.sleep(500);
                 }
                 if (juego.comprobarSiJuegoTermina()) {
