@@ -34,6 +34,11 @@ public class Movimientos {
     public void setDestino(int destino) {
         this.destino = destino;
     }
+
+    @Override
+    public String toString() {
+        return "Se movió un disco de la torre "+this.getOrigen()+" a la torre "+this.getDestino();
+    }
     
     
 }

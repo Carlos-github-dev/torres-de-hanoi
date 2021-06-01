@@ -5,7 +5,6 @@ import excepciones.ColaExcepcion;
 import excepciones.JuegoExcepcion;
 import excepciones.PilaExcepcion;
 import java.util.ArrayList;
-import java.util.List;
 import pilas.ClsPilas;
 
 public class ClsJuego {
@@ -199,11 +198,8 @@ public class ClsJuego {
     public String imprimirHistorial() {
         String txt = "Historial:\n";
         while (historial.size() > 0) {
-            try {
-                txt += "Se movio de la torre ";
-                txt += historial.dequeue();
-                txt += " a la torre ";
-                txt += historial.dequeue() + "\n";
+            try {;
+                txt += historial.dequeue().toString() + "\n";
             } catch (ColaExcepcion ex) {
                 System.out.println(ex.getMessage());
             }

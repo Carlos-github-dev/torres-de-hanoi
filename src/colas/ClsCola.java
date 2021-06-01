@@ -11,7 +11,7 @@ public class ClsCola {
 
     public ClsCola(int tamano) throws ColaExcepcion {
         if(tamano<0){
-            throw new ColaExcepcion("La cantiad maxima de elementos debe ser igual o mayor a cero");
+            throw new ColaExcepcion("La cantidad maxima de elementos debe ser igual o mayor a cero");
         }
         maximumCapacity = tamano;
         currentSize=0;
