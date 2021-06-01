@@ -1,13 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package juego;
 
 /**
- *
- * @author charl
+ * 
+ * @author Carlos Guevara Ramirez, B93564
+ * @author Luis Antonio Arguello Cubero, B90619
+ * @author Paulo Correa Coto, B92398
+ * Clase que almacena dos datos enteros para guardar los puntos de movimiento
  */
 public class Movimientos {
 

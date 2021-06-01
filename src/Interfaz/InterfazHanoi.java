@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Interfaz;
 
 import excepciones.JuegoExcepcion;
@@ -20,15 +16,20 @@ import pilas.Nodo;
 import sun.swing.table.DefaultTableCellHeaderRenderer;
 
 /**
- *
- * @author luis arguello
+ * 
+ * @author Carlos Guevara Ramirez, B93564
+ * @author Luis Antonio Arguello Cubero, B90619
+ * @author Paulo Correa Coto, B92398
  */
 public class InterfazHanoi extends javax.swing.JFrame {
 
     DefaultTableModel modeloTablaTorre1, modeloTablaTorre2, modeloTablaTorre3;
     ClsJuego juego = new ClsJuego();
     int numDiscos;
-
+    
+    /**
+     * Constructor que inicializa las torres
+     */
     public InterfazHanoi() {
         initComponents();
 
@@ -52,9 +53,15 @@ public class InterfazHanoi extends javax.swing.JFrame {
         DefaultTableCellRenderer renderTorre3 = new DefaultTableCellHeaderRenderer();
         renderTorre3.setHorizontalAlignment(SwingConstants.CENTER);
         tb_Torre3.getColumnModel().getColumn(0).setCellRenderer(renderTorre3);
+        
+        this.bloquearBotones();
 
     }
-
+    
+    /**
+     * Metodo para imprimir la pila en los JTables
+     * @param numeroTorre 
+     */
     private void presentarTorre(int numeroTorre) {
         if (numeroTorre == 1) {
             ((DefaultTableModel) tb_Torre1.getModel()).setRowCount(0);
@@ -110,7 +117,11 @@ public class InterfazHanoi extends javax.swing.JFrame {
             modeloTablaTorre3.setRowCount(10);
         }
     }
-
+    /**
+     * Metodo que genera un * dentro de la pila
+     * @param numero
+     * @return 
+     */
     public String obtenerAsteriscos(int numero) {
         if (numero == 1) {
             return "(*)";
@@ -435,7 +446,9 @@ public class InterfazHanoi extends javax.swing.JFrame {
     private void cb_NumDiscosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_NumDiscosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cb_NumDiscosActionPerformed
-
+    /**
+     * Metodo para bloquear los botones a la hora de finalziar el juego
+     */
     public void bloquearBotones() {
         btn_1_B.setEnabled(false);
         btn_1_C.setEnabled(false);
@@ -443,8 +456,11 @@ public class InterfazHanoi extends javax.swing.JFrame {
         btn_2_C.setEnabled(false);
         btn_3_A.setEnabled(false);
         btn_3_B.setEnabled(false);
+        btn_Resolver.setEnabled(false);
     }
-
+    /**
+     * Metodo que desbloquea los botones
+     */
     public void desbloquearBotones() {
         btn_1_B.setEnabled(true);
         btn_1_C.setEnabled(true);
@@ -452,9 +468,13 @@ public class InterfazHanoi extends javax.swing.JFrame {
         btn_2_C.setEnabled(true);
         btn_3_A.setEnabled(true);
         btn_3_B.setEnabled(true);
+        btn_Resolver.setEnabled(true);
 
     }
-
+    /**
+     * Boton que mueve un disco de la torre 3 a la torre 1
+     * @param evt 
+     */
     private void btn_3_AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3_AActionPerformed
         // TODO add your handling code here:
         try {
@@ -465,25 +485,37 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 this.presentarTorre(1);
             }
             if (juego.comprobarSiJuegoTermina()) {
+                int tamanoHistorial = juego.obtenerTamanoHistorial();
                 System.out.println(juego.imprimirHistorial());
                 JOptionPane.showMessageDialog(null, "Felicidades gano\n"
                         + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
-                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+                        + "\nMovimientos realizados: " + tamanoHistorial);
+                this.bloquearBotones();
             }
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_3_AActionPerformed
-
+    /**
+     * Boton que implementa el metodo solucion para resolver de forma automatica
+     * @param evt 
+     */
     private void btn_ResolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ResolverActionPerformed
         try {
-            // TODO add your handling code here:
-            this.simulacion();
+            if(juego.obtenerTamanoHistorial() > 0){
+                JOptionPane.showMessageDialog(null, "El juego ya ha sido iniciado");
+            }else{
+              this.simulacion();
+              
+            }
+            
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_ResolverActionPerformed
-
+    /**
+     * Clase anonima de tipo Runnable que simula la solucion del juego automaticamente
+     */
     class Simulacion implements Runnable {
 
         private ClsJuego juego;
@@ -502,6 +534,7 @@ public class InterfazHanoi extends javax.swing.JFrame {
                     this.juego.moverDisco(movimiento.getOrigen(), movimiento.getDestino());
                     interfaz.presentarTorre(movimiento.getOrigen());
                     interfaz.presentarTorre(movimiento.getDestino());
+                    interfaz.lbl_lastMove.setText("Ultimo movimineto de " + movimiento.getOrigen() + " a " + movimiento.getDestino());
                     Thread.sleep(500);
                 }
                 if (juego.comprobarSiJuegoTermina()) {
@@ -520,12 +553,18 @@ public class InterfazHanoi extends javax.swing.JFrame {
             }
         }
     }
-
+    /**
+     * Metodo que crea y ejecuta un hilo de la clase simulaicon
+     * @throws JuegoExcepcion 
+     */
     private void simulacion() throws JuegoExcepcion {
         Runnable simulacion = new Simulacion(juego, this);
         new Thread(simulacion).start();
     }
-
+    /**
+     * Boton que implementa el metodo iniciarJuego para darle comienzo al juego
+     * @param evt 
+     */
     private void btn_IniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_IniciarActionPerformed
         try {
             // TODO add your handling code here:
@@ -534,13 +573,17 @@ public class InterfazHanoi extends javax.swing.JFrame {
             this.presentarTorre(1);
             this.presentarTorre(2);
             this.presentarTorre(3);
-
+            
+            lbl_lastMove.setText("...");
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_IniciarActionPerformed
 
-
+    /**
+     * Boton que mueve un disco de la torre 1 a la torre 2
+     * @param evt 
+     */
     private void btn_1_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_1_BActionPerformed
         try {
             boolean movimiento = juego.moverDisco(1, 2);
@@ -550,17 +593,22 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 this.presentarTorre(2);
             }
             if (juego.comprobarSiJuegoTermina()) {
+                int tamanoHistorial = juego.obtenerTamanoHistorial();
                 System.out.println(juego.imprimirHistorial());
                 JOptionPane.showMessageDialog(null, "Felicidades gano\n"
                         + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
-                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+                        + "\nMovimientos realizados: " + tamanoHistorial);
+                this.bloquearBotones();
             }
 
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_1_BActionPerformed
-
+    /**
+     * Boton que mueve un disco de la torre 1 a la torre 3
+     * @param evt 
+     */
     private void btn_1_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_1_CActionPerformed
         try {
             boolean movimiento = juego.moverDisco(1, 3);
@@ -570,17 +618,21 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 this.presentarTorre(3);
             }
             if (juego.comprobarSiJuegoTermina()) {
+                int tamanoHistorial = juego.obtenerTamanoHistorial();
                 System.out.println(juego.imprimirHistorial());
                 JOptionPane.showMessageDialog(null, "Felicidades gano\n"
                         + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
-                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
-
+                        + "\nMovimientos realizados: " + tamanoHistorial);
+                this.bloquearBotones();
             }
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_1_CActionPerformed
-
+    /**
+     * Boton que mueve un disco de la torre 2 a la torre 1
+     * @param evt 
+     */
     private void btn_2_AActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_2_AActionPerformed
         // TODO add your handling code here:
         try {
@@ -591,16 +643,21 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 this.presentarTorre(1);
             }
             if (juego.comprobarSiJuegoTermina()) {
+                int tamanoHistorial = juego.obtenerTamanoHistorial();
                 System.out.println(juego.imprimirHistorial());
                 JOptionPane.showMessageDialog(null, "Felicidades gano\n"
                         + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
-                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+                        + "\nMovimientos realizados: " + tamanoHistorial);
+                this.bloquearBotones();
             }
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_2_AActionPerformed
-
+    /**
+     * Boton que mueve un disco de la torre 2 a la torre 3
+     * @param evt 
+     */
     private void btn_2_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_2_CActionPerformed
         // TODO add your handling code here:
         try {
@@ -611,17 +668,22 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 this.presentarTorre(3);
             }
             if (juego.comprobarSiJuegoTermina()) {
+                int tamanoHistorial = juego.obtenerTamanoHistorial();
                 System.out.println(juego.imprimirHistorial());
                 JOptionPane.showMessageDialog(null, "Felicidades gano\n"
                         + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
-                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+                        + "\nMovimientos realizados: " + tamanoHistorial);
+                this.bloquearBotones();
 
             }
         } catch (JuegoExcepcion ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());;
         }
     }//GEN-LAST:event_btn_2_CActionPerformed
-
+    /**
+     * Boton que mueve un disco de la torre 3 a la torre 2
+     * @param evt 
+     */
     private void btn_3_BActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_3_BActionPerformed
         // TODO add your handling code here:
         try {
@@ -632,10 +694,12 @@ public class InterfazHanoi extends javax.swing.JFrame {
                 this.presentarTorre(2);
             }
             if (juego.comprobarSiJuegoTermina()) {
+                int tamanoHistorial = juego.obtenerTamanoHistorial();
                 System.out.println(juego.imprimirHistorial());
                 JOptionPane.showMessageDialog(null, "Felicidades gano\n"
                         + "Cantidad minima de movimientos" + juego.cantidadMinimaDeMovimientos()
-                        + "\nMovimientos realizados: " + juego.obtenerTamanoHistorial());
+                        + "\nMovimientos realizados: " + tamanoHistorial);
+                this.bloquearBotones();
 
             }
         } catch (JuegoExcepcion ex) {

@@ -7,6 +7,13 @@ import excepciones.PilaExcepcion;
 import java.util.ArrayList;
 import pilas.ClsPilas;
 
+/**
+ * 
+ * @author Carlos Guevara Ramirez, B93564
+ * @author Luis Antonio Arguello Cubero, B90619
+ * @author Paulo Correa Coto, B92398
+ */
+
 public class ClsJuego {
 
     private ClsPilas pila1, pila2, pila3;
@@ -20,6 +27,7 @@ public class ClsJuego {
     public void iniciarJuego(int cantidadDeDiscos) throws JuegoExcepcion {
         this.setCantidadDeDiscos(cantidadDeDiscos);
         this.setMovimientosUsuarioCont(0);
+        contador = 0;
         try {
             pila1 = new ClsPilas(cantidadDeDiscos);
             pila2 = new ClsPilas(cantidadDeDiscos);
@@ -112,7 +120,7 @@ public class ClsJuego {
     }
     
     /**
-     * Deulve true si el juego ya finalizo
+     * Devulve true si el juego ya finalizo
      * @return 
      */
     public boolean comprobarSiJuegoTermina() {
@@ -155,11 +163,21 @@ public class ClsJuego {
             cantidadMinimaDeMovimientos(discos - 1, torre2, torre1, torre3);
         }
     }
-
+    /**
+     * Metodo que implementa solucionadorDeJuego
+     * @throws JuegoExcepcion 
+     */
     public void solucionadorDeJuego() throws JuegoExcepcion {
         solucionadorDeJuego(this.cantidadDeDiscos, 1, 2, 3);
     }
-
+    /**
+     * Metodo recursivo que soluciona el juego de forma automatica
+     * @param discos
+     * @param torre1
+     * @param torre2
+     * @param torre3
+     * @throws JuegoExcepcion 
+     */
     private void solucionadorDeJuego(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
         try {
             // Caso Base
@@ -182,12 +200,24 @@ public class ClsJuego {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Metodo que implementa simoladorDeJuego
+     * @return
+     * @throws JuegoExcepcion 
+     */
     public ArrayList simuladorDeJuego() throws JuegoExcepcion {
+        historialMovimientosARealizar = new ArrayList<>();
         simuladorDeJuego(this.cantidadDeDiscos, 1, 2, 3);
         return historialMovimientosARealizar;
     }
-
+    /**
+     * Metodo que guarda los movimientos que se deben hacer en un arrayList
+     * @param discos
+     * @param torre1
+     * @param torre2
+     * @param torre3
+     * @throws JuegoExcepcion 
+     */
     private void simuladorDeJuego(int discos, int torre1, int torre2, int torre3) throws JuegoExcepcion {
         try {
             // Caso Base
@@ -212,7 +242,10 @@ public class ClsJuego {
             System.out.println(ex.getMessage());
         }
     }
-
+    /**
+     * Metodo que imprime una pila
+     * @return 
+     */
     public String imprimirPilas() {
         String txt = "Listas:\n";
         txt += pila1.toString() + "\n";
@@ -220,7 +253,10 @@ public class ClsJuego {
         txt += pila3.toString();
         return txt;
     }
-
+    /**
+     * Metodo que imprime la cola que contiene el historial de movimientos
+     * @return 
+     */
     public String imprimirHistorial() {
         String txt = "Historial:\n";
         while (historial.size() > 0) {
@@ -232,7 +268,10 @@ public class ClsJuego {
         }
         return txt;
     }
-
+    /**
+     * Metodo que obtiene el tamaño de la cola
+     * @return 
+     */
     public int obtenerTamanoHistorial() {
         return historial.size();
     }

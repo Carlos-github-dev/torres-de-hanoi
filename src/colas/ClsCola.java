@@ -2,7 +2,12 @@ package colas;
 
 import excepciones.ColaExcepcion;
 import juego.Movimientos;
-
+/**
+ * 
+ * @author Carlos Guevara Ramirez, B93564
+ * @author Luis Antonio Arguello Cubero, B90619
+ * @author Paulo Correa Coto, B92398
+ */
 public class ClsCola {
 
     private Nodo front, rear;

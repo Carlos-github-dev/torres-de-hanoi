@@ -1,7 +1,12 @@
 package colas;
 
 import juego.Movimientos;
-
+/**
+ * 
+ * @author Carlos Guevara Ramirez, B93564
+ * @author Luis Antonio Arguello Cubero, B90619
+ * @author Paulo Correa Coto, B92398
+ */
 public class Nodo {
     private Movimientos data;
     private Nodo next;
